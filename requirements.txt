@@ -1,0 +1,10 @@
+opencv-python
+numpy
+pyyaml
+requests
+google-generativeai
+openai
+playsound==1.2.2
+anthropic
+sounddevice
+scipy

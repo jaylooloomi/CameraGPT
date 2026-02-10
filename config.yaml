@@ -1,0 +1,79 @@
+# 系統配置
+system:
+  camera_index: 0          # 攝影機索引，通常 0 是預設 webcam
+  interval: 5.0            # 檢測間隔 (秒)
+  diff_threshold: 3.0      # 畫面變動百分比閾值 (例如 1.0 代表 1% 像素改變)
+  system_prompt: "(所有回答都採用繁體中文回答)"
+
+# AI 提問配置
+prompt:
+  question: "圖片中的人有沒有戴帽子？請只回答'是'或'否'。"
+  trigger_keyword: "是"    # 如果 AI 回答包含此關鍵字，則發送通知
+
+# AI 後端配置
+# provider 可選: 'mock', 'ollama_minmax', 'ollama_llava', 'ollama_moondream', 'gemini_flash', 'gemini_pro', 'openai', 'anthropic'
+ai:
+  provider: "ollama_minicpm"
+
+  ollama_minmax:
+    base_url: "http://localhost:11434"
+    model: "minimax-m2:cloud"
+
+  ollama_llava:
+    base_url: "http://localhost:11434"
+    model: "llava" # 需支援視覺的模型
+    num_gpu: 0  # GPU 層數，0 表示全 CPU
+    num_thread: 4  # CPU 執行緒數
+
+  ollama_minicpm:
+    base_url: "http://localhost:11434"
+    model: "minicpm-v"
+    num_gpu: 50  # GPU 層數，0 表示全 CPU；如果有 GPU，可設為正數如 35
+    num_thread: 24  # CPU 執行緒數，設為物理核心數 28 以提升速度
+
+  ollama_moondream:
+    base_url: "http://localhost:11434"
+    model: "moondream" # 需支援視覺的模型
+  
+  gemini_flash:
+    api_key: "YOUR_OPENAI_API_KEY"
+    model: "gemini-2.0-flash"
+  
+  gemini_pro:
+    api_key: "YOUR_OPENAI_API_KEY"
+    model: "gemini-3-pro-preview"
+  
+  openai:
+    api_key: "YOUR_OPENAI_API_KEY"
+    model: "gpt-4o"
+
+# Email 通知配置
+email:
+  enabled: false          # 是否啟用 Email 通知
+  smtp_server: "smtp.gmail.com"
+  smtp_port: 587
+  sender_email: "your_email@gmail.com"
+  sender_password: "your_app_password"
+  receiver_email: "receiver_email@example.com"
+  subject: "警報：檢測到目標特徵！"
+
+# Line 通知配置 (未實作)
+line_notify:
+  enabled: false
+  token: "YOUR_LINE_NOTIFY_TOKEN"
+
+# 電話通知配置 (未實作)
+phone_notify:
+  enabled: false
+  phone_number: "YOUR_PHONE_NUMBER"
+
+# 警報音效配置
+alarm_sound:
+  enabled: true
+  sound_file: "source/alert.wav" # 您的警報音效檔路徑 (例如: 在專案根目錄)
+
+# 鬧鐘功能配置 (未實作)
+alarm_clock:
+  enabled: false
+  time: "07:00" # 例如: 每天早上 7 點
+
